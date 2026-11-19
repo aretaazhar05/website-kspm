@@ -1,0 +1,343 @@
+/* ============================================================
+   OPENING INTRO — semua class memakai prefix .intro-
+   File ini hanya dipakai oleh src/components/IntroAnimation.tsx.
+   Tidak ada aturan global yang menyentuh homepage.
+   ============================================================ */
+
+.intro-root {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  overflow: hidden;
+  background: #050f24;
+  color: #ffffff;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.intro-root[data-leaving="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(to right, rgba(151, 179, 223, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(151, 179, 223, 0.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.intro-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34rem;
+  height: 34rem;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: rgba(30, 55, 120, 0.38);
+  filter: blur(140px);
+}
+
+.intro-topline {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(234, 182, 48, 0.6),
+    transparent
+  );
+}
+
+.intro-skip {
+  position: absolute;
+  z-index: 10;
+  top: max(1.25rem, env(safe-area-inset-top));
+  right: max(1.25rem, env(safe-area-inset-right));
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.intro-skip:hover {
+  border-color: rgba(247, 225, 148, 0.5);
+  color: #f2cb5b;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.intro-skip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(234, 182, 48, 0.9);
+}
+
+.intro-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding-inline: 1.5rem;
+}
+
+.intro-scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-inline: 1.5rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.intro-scene[data-leave="up"] {
+  transform: translateY(-12px);
+}
+
+.intro-scene[data-active="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  color: #f2cb5b;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.intro-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.intro-title {
+  max-width: 44rem;
+  margin: 1.25rem 0 0;
+  color: #ffffff;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.intro-divider {
+  display: block;
+  width: 6rem;
+  height: 1px;
+  margin: 1.75rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(234, 182, 48, 0.9),
+    transparent
+  );
+}
+
+.intro-logo-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-logo-halo {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 30rem;
+  height: 30rem;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(234, 182, 48, 0.44) 0%,
+    rgba(234, 182, 48, 0.16) 44%,
+    transparent 72%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.intro-logo-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(9rem, 34vw, 13rem);
+  height: clamp(9rem, 34vw, 13rem);
+  padding: 1.25rem;
+  border: 1px solid rgba(247, 225, 148, 0.6);
+  border-radius: 2rem;
+  background: #ffffff;
+  box-shadow:
+    0 0 80px rgba(234, 182, 48, 0.18),
+    0 30px 90px -35px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transform: scale(0.86);
+  transition:
+    opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.intro-scene[data-active="true"] .intro-logo-tile {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.intro-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.intro-logo[data-visible="true"] {
+  opacity: 1;
+}
+
+.intro-logo-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: #0a1b3a;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.intro-org {
+  margin: 1.75rem 0 0;
+  color: #f2cb5b;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.7s ease 0.35s,
+    transform 0.7s ease 0.35s;
+}
+
+.intro-scene[data-active="true"] .intro-org {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-welcome-title {
+  margin: 1rem 0 0;
+  color: #ffffff;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.875rem, 1.3rem + 2.4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.intro-welcome-title span {
+  color: #eab630;
+}
+
+.intro-tagline {
+  max-width: 32rem;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  line-height: 1.65;
+}
+
+.intro-dots {
+  position: absolute;
+  bottom: max(2rem, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateX(-50%);
+}
+
+.intro-dot {
+  display: block;
+  width: 1rem;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  transition:
+    width 0.5s ease,
+    background-color 0.5s ease;
+}
+
+.intro-dot[data-active="true"] {
+  width: 2rem;
+  background: #eab630;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-root,
+  .intro-scene,
+  .intro-logo-tile,
+  .intro-org,
+  .intro-dot {
+    transition: none;
+  }
+
+  .intro-scene {
+    transform: none;
+  }
+
+  .intro-logo-tile {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-org {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-logo-halo {
+    display: none;
+  }
+}
